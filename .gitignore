@@ -1,0 +1,17 @@
+# python
+__pycache__/
+*.pyc
+
+# django
+db.sqlite3
+.env
+
+# mac
+.DS_Store
+
+# editor
+.idea
+.vscode
+
+# node (caso uses no futuro)
+node_modules
