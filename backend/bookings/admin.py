@@ -7,13 +7,18 @@ class BookingAdmin(admin.ModelAdmin):
     list_display = (
         "nome",
         "email",
-        "telemovel",
-        "marca_bicicleta",
-        "modelo_bicicleta",
+        "telefone",
+        "marcaBike",
+        "modeloBike",
         "mensagem",
         "data",
     )
 
-    search_fields = ("nome", "email", "marca_bicicleta", "modelo_bicicleta")
+    search_fields = (
+        "nome",
+        "email",
+        "marcaBike",
+        "modeloBike",
+    )
 
     list_filter = ("data",)
