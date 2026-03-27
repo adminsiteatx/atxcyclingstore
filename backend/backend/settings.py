@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3iw5x+=1%4u&((48z!oe+!h+rqpyn7n%2o^q(0w_eoz%!&tczr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -113,6 +113,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -128,3 +129,7 @@ import os
 ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+import os
+
+SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key")
