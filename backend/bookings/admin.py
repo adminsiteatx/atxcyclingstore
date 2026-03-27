@@ -8,17 +8,25 @@ class BookingAdmin(admin.ModelAdmin):
         "nome",
         "email",
         "telefone",
-        "marcaBike",
-        "modeloBike",
+        "servico",
+        "modelo_bike",
         "mensagem",
         "data",
+        "estado",
+        "created_at",
     )
 
     search_fields = (
         "nome",
         "email",
-        "marcaBike",
-        "modeloBike",
+        "telefone",
+        "modelo_bike",
     )
 
-    list_filter = ("data",)
+    list_filter = (
+        "servico",
+        "estado",
+        "created_at",
+    )
+
+    ordering = ("-created_at",)
