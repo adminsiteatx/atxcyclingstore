@@ -136,3 +136,7 @@ import os
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key")
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+CORS_ALLOWED_ORIGINS = [
+    "https://atxcyclingstore.vercel.app",
+]
