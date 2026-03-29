@@ -239,14 +239,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* redirecionar para página de confirmação */
 
-    form.addEventListener("submit", function () {
+    form.addEventListener("submit", async function (e) {
+
+        e.preventDefault();
 
         const submitBtn = document.getElementById("submitBtn");
 
+        // 🔒 bloquear botão
         submitBtn.disabled = true;
         submitBtn.textContent = "A enviar...";
 
-        localStorage.clear();
+        const dados = {
+            nome: document.getElementById("nome").value,
+            email: document.getElementById("email").value,
+            telefone: document.getElementById("telefone").value,
+            servico: document.getElementById("servico").value,
+            modelo_bike: document.getElementById("modeloBike").value,
+            mensagem: document.getElementById("mensagem").value,
+            data: document.getElementById("data").value
+        };
+
+        try {
+
+            const res = await fetch("https://atxcyclingstore.onrender.com/api/bookings/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dados)
+            });
+
+            const result = await res.json();
+
+            if (result.success) {
+                window.location.href = "confirmacao.html";
+            } else {
+                throw new Error("Erro backend");
+            }
+
+        } catch (err) {
+
+            console.error(err);
+
+            alert("Erro ao enviar");
+
+            // 🔓 voltar ao normal se falhar
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Enviar Pedido";
+        }
 
     });
 
