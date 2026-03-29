@@ -141,7 +141,7 @@ def create_booking(request):
             </p>
 
             <img
-            src="https://i.imgur.com/D99KBIB.png"
+            src="https://raw.githubusercontent.com/adminsiteatx/atxcyclingstore/main/images/atx.png"
             width="120"
             style="opacity:0.9"
             />
