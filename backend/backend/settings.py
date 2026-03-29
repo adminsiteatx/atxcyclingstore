@@ -20,9 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = []
+DEBUG = True
 
 # Application definition
 
@@ -115,20 +113,15 @@ STATIC_URL = 'static/'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'adminsiteatx@gmail.com'
+EMAIL_HOST_PASSWORD = 'bfcdsellkifytrtm'
 
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-EMAIL_USE_TLS = False
-
-EMAIL_HOST_USER = "adminsiteatx@gmail.com"
-EMAIL_HOST_PASSWORD = "bfcdsellkifytrtm"
-
-DEFAULT_FROM_EMAIL = "adminsiteatx@gmail.com"
-
-EMAIL_TIMEOUT = 30
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 import os
 
