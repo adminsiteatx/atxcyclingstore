@@ -141,7 +141,7 @@ def create_booking(request):
             </p>
 
             <img
-            src="https://atxcyclingstore.vercel.app/public/images/atx.png"
+            src="https://imgur.com/a/b76Zv4l"
             width="120"
             style="opacity:0.9"
             />
