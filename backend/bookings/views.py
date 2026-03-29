@@ -141,7 +141,7 @@ def create_booking(request):
             </p>
 
             <img
-            src="https://imgur.com/a/b76Zv4l"
+            src="https://i.imgur.com/D99KBIB.png"
             width="120"
             style="opacity:0.9"
             />
