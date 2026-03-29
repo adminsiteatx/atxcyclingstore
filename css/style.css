@@ -175,10 +175,11 @@ footer {
 
 .hamburger span {
 
-    width: 25px;
+    background: #ffffff !important;
+
     height: 3px;
-    background: white !important;
-    display: block;
+
+    border-radius: 2px;
 
 }
 
@@ -188,18 +189,21 @@ footer {
 /* ============================= */
 
 .hero {
-    height: 90vh;
+
+    min-height: 90svh;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     text-align: center;
-    position: relative;
+
     padding: 0 20px;
 
-    background: radial-gradient(circle at left, rgba(0, 119, 204, 0.35), transparent 50%),
-    radial-gradient(circle at right, rgba(0, 119, 204, 0.35), transparent 50%),
-    #000;
+    background: radial-gradient(circle at 20% 40%, rgba(0, 119, 204, 0.35) 0%, rgba(0, 119, 204, 0.08) 35%, rgba(0, 0, 0, 0) 60%),
+    radial-gradient(circle at 80% 60%, rgba(0, 119, 204, 0.25) 0%, rgba(0, 119, 204, 0.05) 40%, rgba(0, 0, 0, 0) 65%),
+    #020617;
 
 }
 
@@ -296,37 +300,6 @@ footer {
 .container-marcas img:hover {
     opacity: 1;
     transform: scale(1.05);
-}
-
-
-/* ============================= */
-/* BOTÕES */
-/* ============================= */
-
-.btn-primary {
-
-    display: inline-block;
-
-    width: fit-content;
-
-    padding: 12px 28px;
-
-    background: #0077cc;
-    color: white;
-
-    border: none;
-    border-radius: 6px;
-
-    font-weight: 500;
-    font-size: 16px;
-
-    cursor: pointer;
-
-    transition: 0.25s;
-}
-
-.btn-primary:hover {
-    background: #005fa3;
 }
 
 
