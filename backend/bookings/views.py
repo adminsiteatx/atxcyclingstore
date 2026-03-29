@@ -53,7 +53,7 @@ def create_booking(request):
             email = EmailMultiAlternatives(
                 subject,
                 text_content,
-                None,
+                "adminsiteatx@gmail.com",
                 ["adminsiteatx@gmail.com"]
             )
             email.attach_alternative(html_content, "text/html")
@@ -123,7 +123,7 @@ def create_booking(request):
             email_client = EmailMultiAlternatives(
                 subject_client,
                 text_client,
-                None,
+                "adminsiteatx@gmail.com",
                 [booking.email]
             )
 
