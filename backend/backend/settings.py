@@ -143,3 +143,5 @@ CORS_ALLOWED_ORIGINS = [
     "https://atxcyclingstore.vercel.app",
 ]
 
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
