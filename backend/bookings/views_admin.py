@@ -65,3 +65,32 @@ def booking_detail(request, id):
         "booking": booking
 
     })
+
+@login_required(login_url="/login-admin")
+def nova_marcacao(request):
+
+    if request.method == "POST":
+
+        Booking.objects.create(
+
+            nome=request.POST.get("nome"),
+
+            email=request.POST.get("email"),
+
+            telefone=request.POST.get("telefone"),
+
+            servico=request.POST.get("servico"),
+
+            modelo_bike=request.POST.get("modelo_bike"),
+
+            mensagem=request.POST.get("mensagem"),
+
+            data=request.POST.get("data"),
+
+            estado="pendente"
+
+        )
+
+        return redirect("/painel")
+
+    return render(request, "nova_marcacao.html")

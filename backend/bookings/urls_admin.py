@@ -11,4 +11,6 @@ urlpatterns = [
 
     path("booking/<int:id>/", views_admin.booking_detail),
 
+    path("nova-marcacao/", views_admin.nova_marcacao),
+
 ]

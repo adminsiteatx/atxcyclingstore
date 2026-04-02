@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Nova marcação</title>
+
+    <link rel="icon" href="/favicon_black.png">
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background: #f5f5f5;
+            padding: 40px;
+        }
+
+        .card {
+            margin-top: 20px;
+            background: white;
+            padding: 20px 40px;
+            align-items: center;
+            max-width: 600px;
+
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background-color: mediumseagreen;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<a href="/painel">← voltar</a>
+
+<div class="card">
+
+    <h2>Nova marcação</h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input name="nome" placeholder="nome">
+
+        <input name="email" placeholder="email">
+
+        <input name="telefone" placeholder="telefone">
+
+        <input name="servico" placeholder="serviço">
+
+        <input name="modelo_bike" placeholder="modelo bicicleta">
+
+        <textarea name="mensagem" placeholder="mensagem"></textarea>
+
+        <input name="data">
+
+        <button>
+
+            Guardar
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>

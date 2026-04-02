@@ -87,6 +87,16 @@
             display: inline-block;
         }
 
+        .novo {
+            display: inline-block;
+            margin-bottom: 20px;
+            background: #222;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
     </style>
 
 </head>
@@ -99,6 +109,7 @@
 
 <div class="tabs">
 
+
     <div class="tab active" onclick="mostrar('pendentes', event)">
         Pendentes ({{ pendentes|length }})
     </div>
@@ -106,6 +117,10 @@
     <div class="tab" onclick="mostrar('concluidos', event)">
         Concluídos ({{ concluidos|length }})
     </div>
+
+     <a href="/nova-marcacao" class="novo">
+        + Nova marcação
+    </a>
 
 </div>
 
