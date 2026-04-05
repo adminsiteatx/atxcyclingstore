@@ -80,39 +80,59 @@ def nova_marcacao(request):
 
         )
 
-        try:
+        # EMAIL ADMIN
 
-            # EMAIL ADMIN
-            subject_admin = "Nova marcação – ATX Cycling Store"
+        subject_admin = "Nova marcação - ATX Cycling Store"
 
-            html_admin = f"""
+        html_admin = f"""
+
+        <div style="font-family: Arial; padding:20px;">
+
             <h2>Nova marcação recebida</h2>
 
             <p><strong>Nome:</strong> {booking.nome}</p>
+
             <p><strong>Email:</strong> {booking.email}</p>
+
             <p><strong>Telefone:</strong> {booking.telefone}</p>
 
             <p><strong>Serviço:</strong> {booking.servico}</p>
+
             <p><strong>Bicicleta:</strong> {booking.modelo_bike}</p>
 
             <p><strong>Data:</strong> {booking.data}</p>
 
-            <p><strong>Mensagem:</strong><br>
-            {booking.mensagem}
-            </p>
-            """
+        </div>
 
-            send_email(
-                "adminsiteatx@gmail.com",
-                subject_admin,
-                html_admin
-            )
+        <p><strong>Mensagem do cliente:</strong></p>
 
-            # EMAIL CLIENTE
+        <div style="
+        background:#fff;
+        border-left:4px solid #002a4d;
+        padding:15px;
+        margin-top:10px;
+        border-radius:6px;
+        ">
 
+        {booking.mensagem}
+
+        </div>
+
+        """
+
+        send_email(
+            "adminsiteatx@gmail.com",
+            subject_admin,
+            html_admin
+        )
+
+        # EMAIL CLIENTE
+
+        if booking.email:
             subject_client = "Confirmação da sua marcação – ATX Cycling Store"
 
             html_client = f"""
+
             <div style="font-family:Arial;padding:25px;background:#f5f5f5">
 
             <div style="
@@ -151,19 +171,27 @@ def nova_marcacao(request):
             <p><strong>Data pretendida:</strong> {booking.data}</p>
 
             <p><strong>Mensagem:</strong><br>
+
             <span style="color:#555">
+
             {booking.mensagem}
+
             </span>
+
             </p>
 
             </div>
 
             <p>
+
             Entraremos em contacto brevemente para confirmar a disponibilidade.
+
             </p>
 
             <p>
+
             Obrigado pela confiança.
+
             </p>
 
             <hr style="margin:30px 0">
@@ -175,7 +203,9 @@ def nova_marcacao(request):
             font-weight:600;
             color:#002a4d
             ">
+
             ATX Cycling Store
+
             </p>
 
             <img
@@ -189,7 +219,9 @@ def nova_marcacao(request):
             color:#888;
             margin-top:15px
             ">
+
             Oficina certificada Shimano Service Center
+
             </p>
 
             </div>
@@ -197,6 +229,7 @@ def nova_marcacao(request):
             </div>
 
             </div>
+
             """
 
             send_email(
@@ -204,10 +237,6 @@ def nova_marcacao(request):
                 subject_client,
                 html_client
             )
-
-        except Exception as e:
-
-            print("ERRO EMAIL ADMIN:", e)
 
         return redirect("/painel")
 
