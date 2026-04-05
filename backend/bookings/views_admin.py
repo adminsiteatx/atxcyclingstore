@@ -1,12 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from .gmail_service import send_email
 
 from .models import Booking
 
 
 def admin_login(request):
-
     if request.method == "POST":
 
         username = request.POST.get("username")
@@ -15,7 +15,6 @@ def admin_login(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None and user.is_staff:
-
             login(request, user)
 
             return redirect("/painel")
@@ -25,7 +24,6 @@ def admin_login(request):
 
 @login_required(login_url="/login-admin")
 def painel(request):
-
     pendentes = Booking.objects.filter(estado="pendente").order_by("-created_at")
 
     concluidos = Booking.objects.filter(estado="concluido").order_by("-created_at")
@@ -39,10 +37,10 @@ def painel(request):
 
 
 def admin_logout(request):
-
     logout(request)
 
     return redirect("/login-admin")
+
 
 from django.shortcuts import get_object_or_404
 from .models import Booking
@@ -50,11 +48,9 @@ from .models import Booking
 
 @login_required(login_url="/login-admin")
 def booking_detail(request, id):
-
     booking = get_object_or_404(Booking, id=id)
 
     if request.method == "POST":
-
         booking.estado = "concluido"
         booking.save()
 
@@ -66,12 +62,9 @@ def booking_detail(request, id):
 
     })
 
-from .gmail_service import send_email
-
 
 @login_required(login_url="/login-admin")
 def nova_marcacao(request):
-
     if request.method == "POST":
 
         booking = Booking.objects.create(
@@ -89,29 +82,24 @@ def nova_marcacao(request):
 
         try:
 
-            # EMAIL PARA ADMIN
+            # EMAIL ADMIN
             subject_admin = "Nova marcação – ATX Cycling Store"
 
             html_admin = f"""
-            <div style="font-family:Arial;padding:20px">
-
             <h2>Nova marcação recebida</h2>
 
             <p><strong>Nome:</strong> {booking.nome}</p>
-
             <p><strong>Email:</strong> {booking.email}</p>
-
             <p><strong>Telefone:</strong> {booking.telefone}</p>
 
             <p><strong>Serviço:</strong> {booking.servico}</p>
-
             <p><strong>Bicicleta:</strong> {booking.modelo_bike}</p>
 
             <p><strong>Data:</strong> {booking.data}</p>
 
-            <p><strong>Mensagem:</strong> {booking.mensagem}</p>
-
-            </div>
+            <p><strong>Mensagem:</strong><br>
+            {booking.mensagem}
+            </p>
             """
 
             send_email(
@@ -120,6 +108,7 @@ def nova_marcacao(request):
                 html_admin
             )
 
+            # EMAIL CLIENTE
 
             subject_client = "Confirmação da sua marcação – ATX Cycling Store"
 
@@ -200,9 +189,7 @@ def nova_marcacao(request):
             color:#888;
             margin-top:15px
             ">
-
             Oficina certificada Shimano Service Center
-
             </p>
 
             </div>
@@ -220,10 +207,8 @@ def nova_marcacao(request):
 
         except Exception as e:
 
-            print("ERRO EMAIL:", e)
-
+            print("ERRO EMAIL ADMIN:", e)
 
         return redirect("/painel")
-
 
     return render(request, "nova_marcacao.html")
