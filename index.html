@@ -20,6 +20,53 @@
 
 </head>
 
+<div id="cookie-banner" class="cookie-banner">
+    <p>
+        Este site utiliza cookies para melhorar a experiência do utilizador e processar marcações.
+        Ao continuar a navegar, concorda com a nossa
+        <a href="/termos" target="_blank">Política de Privacidade</a>.
+    </p>
+    <button onclick="acceptCookies()">Aceitar</button>
+</div>
+
+<style>
+    .cookie-banner {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        border-radius: 10px;
+        padding: 15px 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        font-size: 14px;
+        max-width: 400px;
+        z-index: 9999;
+    }
+
+    .cookie-banner button {
+        margin-top: 10px;
+        padding: 8px 14px;
+        border: none;
+        background: black;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    function acceptCookies() {
+        localStorage.setItem("cookiesAccepted", "true");
+        document.getElementById("cookie-banner").style.display = "none";
+    }
+
+    if (localStorage.getItem("cookiesAccepted")) {
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("cookie-banner").style.display = "none";
+        });
+    }
+</script>
 
 <body>
 
