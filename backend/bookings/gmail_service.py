@@ -27,6 +27,7 @@ def send_email(to_email, subject, html_content):
 
     message["to"] = to_email
     message["subject"] = subject
+    message["from"] = "ATX Cycling Store <adminsiteatx@gmail.com>"
 
     raw_message = base64.urlsafe_b64encode(
         message.as_bytes()
