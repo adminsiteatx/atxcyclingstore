@@ -21,52 +21,35 @@
 </head>
 
 <div id="cookie-banner" class="cookie-banner">
-    <p>
-        Este site utiliza cookies para melhorar a experiência do utilizador e processar marcações.
-        Ao continuar a navegar, concorda com a nossa
-        <a href="/termos" target="_blank">Política de Privacidade</a>.
-    </p>
-    <button onclick="acceptCookies()">Aceitar</button>
+
+    <div class="cookie-card">
+
+        <p class="cookie-text">
+            Utilizamos cookies essenciais para processar a sua marcação
+            (nome, email e telefone).
+
+            Pode aceitar apenas os essenciais ou rejeitar.
+        </p>
+
+        <div class="cookie-actions">
+
+            <button id="cookie-reject" class="cookie-btn-outline">
+                Rejeitar
+            </button>
+
+            <button id="cookie-essential" class="cookie-btn-outline">
+                Apenas essenciais
+            </button>
+
+            <button id="cookie-accept" class="cookie-btn-primary">
+                Aceitar todos
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
-
-<style>
-    .cookie-banner {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: white;
-        border-radius: 10px;
-        padding: 15px 20px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-        font-size: 14px;
-        max-width: 400px;
-        z-index: 9999;
-    }
-
-    .cookie-banner button {
-        margin-top: 10px;
-        padding: 8px 14px;
-        border: none;
-        background: black;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-</style>
-
-<script>
-    function acceptCookies() {
-        localStorage.setItem("cookiesAccepted", "true");
-        document.getElementById("cookie-banner").style.display = "none";
-    }
-
-    if (localStorage.getItem("cookiesAccepted")) {
-        document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("cookie-banner").style.display = "none";
-        });
-    }
-</script>
 
 <body>
 

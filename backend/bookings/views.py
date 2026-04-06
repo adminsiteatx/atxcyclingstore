@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
@@ -13,6 +13,14 @@ def create_booking(request):
         try:
 
             data = json.loads(request.body)
+
+            consentimento = data.get("cookieConsent")
+
+            if consentimento not in ["essential", "all"]:
+                return JsonResponse(
+                    {"error": "Tem de aceitar cookies essenciais."},
+                    status=403
+                )
 
             booking = Booking.objects.create(
 

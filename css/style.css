@@ -5,21 +5,21 @@
 *,
 *::before,
 *::after {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    -webkit-text-size-adjust:100%;
+html {
+    -webkit-text-size-adjust: 100%;
 }
 
-body{
+body {
 
-    margin:0;
+    margin: 0;
 
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
 }
 
@@ -27,40 +27,40 @@ body{
 button,
 input,
 textarea,
-select{
+select {
 
-    font:inherit;
+    font: inherit;
 
-    border:none;
-    outline:none;
+    border: none;
+    outline: none;
 
-    background:none;
+    background: none;
 
-    color:inherit;
+    color: inherit;
 
 }
 
 /* remove estilo automático dos links */
 
-a{
+a {
 
-    color:inherit;
-    text-decoration:none;
+    color: inherit;
+    text-decoration: none;
 
 }
 
 /* imagens nunca rebentam layout */
 
-img{
+img {
 
-    max-width:100%;
-    height:auto;
+    max-width: 100%;
+    height: auto;
 
 }
 
 /* remove highlight azul Android */
 
-*{
+* {
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -68,11 +68,11 @@ img{
 
 button,
 input,
-select{
+select {
 
-    appearance:none;
-    -webkit-appearance:none;
-    -moz-appearance:none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 
 }
 
@@ -1735,6 +1735,108 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 
     .shimano-pontos {
         align-items: flex-start;
+    }
+
+}
+
+/* ============================= */
+/* COOKIES */
+/* ============================= */
+
+.cookie-banner {
+
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: calc(100% - 30px);
+    max-width: 520px;
+
+    z-index: 2000;
+
+}
+
+.cookie-card {
+
+    background: #111;
+    border: 1px solid #333;
+
+    padding: 18px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+
+}
+
+.cookie-text {
+
+    font-size: 14px;
+    color: #ccc;
+
+    margin-bottom: 14px;
+    line-height: 1.5;
+
+}
+
+.cookie-actions {
+
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+
+}
+
+.cookie-btn-primary {
+
+    background: #0077cc;
+
+    color: white;
+
+    padding: 8px 14px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+}
+
+.cookie-btn-outline {
+
+    border: 1px solid #444;
+
+    padding: 8px 14px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+}
+
+.cookie-btn-outline:hover {
+
+    border-color: #0077cc;
+
+}
+
+@media (max-width: 600px) {
+
+    .cookie-actions {
+
+        flex-direction: column;
+
+    }
+
+    .cookie-btn-primary,
+    .cookie-btn-outline {
+
+        width: 100%;
+
     }
 
 }

@@ -1,11 +1,9 @@
 /* guarda o scroll quando é dado refresh */
-
 if ("scrollRestoration" in history) {
     history.scrollRestoration = "auto";
 }
 
-/* efeito de scroll */
-
+/* efeito fade */
 const fadeElements = document.querySelectorAll(".fade-in");
 
 const observer = new IntersectionObserver((entries) => {
@@ -20,15 +18,12 @@ const observer = new IntersectionObserver((entries) => {
 
     });
 
-}, {
-    threshold: 0.01
-});
-
-
-/* marcação de pagina */
+}, { threshold: 0.01 });
 
 fadeElements.forEach(el => observer.observe(el));
 
+
+/* link activo menu */
 const links = document.querySelectorAll(".nav-link");
 
 const currentPage = window.location.pathname.split("/").pop();
@@ -43,8 +38,8 @@ links.forEach(link => {
 
 });
 
-/* aparecimento/desaparecimento botao flutuante */
 
+/* botão flutuante reserva */
 document.addEventListener("DOMContentLoaded", () => {
 
     const floatingBtn = document.getElementById("floatingReserva");
@@ -52,14 +47,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!floatingBtn || triggers.length === 0) return;
 
-    const observer = new IntersectionObserver((entries) => {
+    const observerBtn = new IntersectionObserver((entries) => {
 
         let visible = false;
 
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                visible = true;
-            }
+            if (entry.isIntersecting) visible = true;
         });
 
         if (visible) {
@@ -68,29 +61,25 @@ document.addEventListener("DOMContentLoaded", () => {
             floatingBtn.classList.add("show");
         }
 
-    }, {
-        threshold: 0.2
-    });
+    }, { threshold: 0.2 });
 
-    triggers.forEach(el => observer.observe(el));
+    triggers.forEach(el => observerBtn.observe(el));
 
 });
 
-/* guarda automaticamente o formulário */
 
-const form = document.querySelector(".reserva-form");
+/* AUTOSAVE FORM */
+const formAutoSave = document.querySelector(".reserva-form");
 
-if (form) {
+if (formAutoSave) {
 
-    const inputs = form.querySelectorAll("input, textarea, select");
+    const inputs = formAutoSave.querySelectorAll("input, textarea, select");
 
     inputs.forEach(input => {
 
         const savedValue = localStorage.getItem(input.name);
 
-        if (savedValue) {
-            input.value = savedValue;
-        }
+        if (savedValue) input.value = savedValue;
 
         input.addEventListener("input", () => {
             localStorage.setItem(input.name, input.value);
@@ -100,39 +89,34 @@ if (form) {
 
 }
 
-/* limpar no botão cancelar */
 
+/* cancelar reserva limpa apenas dados */
 const cancelBtn = document.getElementById("cancelarReserva");
 
 if (cancelBtn) {
 
     cancelBtn.addEventListener("click", () => {
 
-        localStorage.clear();
-        form.reset();
+        localStorage.removeItem("nome");
+        localStorage.removeItem("email");
+        localStorage.removeItem("telefone");
+        localStorage.removeItem("mensagem");
+        localStorage.removeItem("data");
+        localStorage.removeItem("modelo_bike");
+        localStorage.removeItem("servico");
+
+        formAutoSave.reset();
 
     });
 
 }
 
-/* Limpar ao submeter */
 
-const reservaForm = document.getElementById("reservaForm");
-
-if (reservaForm) {
-
-    reservaForm.addEventListener("submit", () => {
-        localStorage.clear();
-    });
-
-}
-
-
+/* MULTISTEP FORM */
 document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("reservaForm");
 
-    /* se não houver formulário, não executa o resto */
     if (!form) return;
 
 
@@ -144,23 +128,19 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentStep = 0;
 
 
-    function showStep(index) {
+    function showStep(index){
 
         steps.forEach(step => step.classList.remove("active"));
+
         steps[index].classList.add("active");
 
+        indicators.forEach((indicator, i)=>{
 
-        indicators.forEach((indicator, i) => {
+            indicator.classList.remove("active","done");
 
-            indicator.classList.remove("active", "done");
+            if(i === index) indicator.classList.add("active");
 
-            if (i === index) {
-                indicator.classList.add("active");
-            }
-
-            if (i < index) {
-                indicator.classList.add("done");
-            }
+            if(i < index) indicator.classList.add("done");
 
         });
 
@@ -169,16 +149,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     nextBtns.forEach(btn => {
 
-        btn.addEventListener("click", function () {
+        btn.addEventListener("click", function(){
 
-            if (currentStep < steps.length - 1) {
+            if(currentStep < steps.length-1){
+
                 currentStep++;
+
                 showStep(currentStep);
+
             }
 
-            if (currentStep === 2) {
-                preencherResumo();
-            }
+            if(currentStep === 2) preencherResumo();
 
         });
 
@@ -187,11 +168,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     prevBtns.forEach(btn => {
 
-        btn.addEventListener("click", function () {
+        btn.addEventListener("click", function(){
 
-            if (currentStep > 0) {
+            if(currentStep > 0){
+
                 currentStep--;
+
                 showStep(currentStep);
+
             }
 
         });
@@ -199,93 +183,139 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    function preencherResumo() {
+    function preencherResumo(){
 
         document.getElementById("resumoServico").textContent =
-            document.getElementById("servico").value;
+        document.getElementById("servico").value;
 
         document.getElementById("resumoBike").textContent =
-            document.getElementById("modeloBike").value;
+        document.getElementById("modeloBike").value;
 
         document.getElementById("resumoData").textContent =
-            document.getElementById("data").value;
+        document.getElementById("data").value;
 
         document.getElementById("resumoMensagem").textContent =
-            document.getElementById("mensagem").value;
+        document.getElementById("mensagem").value;
 
         document.getElementById("resumoNome").textContent =
-            document.getElementById("nome").value;
+        document.getElementById("nome").value;
 
         document.getElementById("resumoEmail").textContent =
-            document.getElementById("email").value;
+        document.getElementById("email").value;
 
         document.getElementById("resumoTelefone").textContent =
-            document.getElementById("telefone").value;
+        document.getElementById("telefone").value;
 
     }
 
 
-    /* bloquear datas anteriores */
-
+    /* bloquear datas passadas */
     const dataInput = document.getElementById("data");
 
-    if (dataInput) {
+    if (dataInput){
 
         const today = new Date().toISOString().split("T")[0];
+
         dataInput.setAttribute("min", today);
 
     }
 
 
-    /* redirecionar para página de confirmação */
-
-    form.addEventListener("submit", async function (e) {
+    /* SUBMIT FINAL */
+    form.addEventListener("submit", async function(e){
 
         e.preventDefault();
 
+        const consent = localStorage.getItem("cookieConsent");
+
+
+        /* bloqueio final */
+        if(!consent || consent === "rejected"){
+
+            alert("Para enviar a marcação tem de aceitar cookies essenciais.");
+
+            return;
+
+        }
+
+
         const submitBtn = document.getElementById("submitBtn");
 
-        // 🔒 bloquear botão
         submitBtn.disabled = true;
+
         submitBtn.textContent = "A enviar...";
 
+
         const dados = {
+
             nome: document.getElementById("nome").value,
+
             email: document.getElementById("email").value,
+
             telefone: document.getElementById("telefone").value,
+
             servico: document.getElementById("servico").value,
+
             modelo_bike: document.getElementById("modeloBike").value,
+
             mensagem: document.getElementById("mensagem").value,
-            data: document.getElementById("data").value
+
+            data: document.getElementById("data").value,
+
+            cookieConsent: consent
+
         };
 
-        try {
 
-            const res = await fetch("https://atxcyclingstore.onrender.com/bookings/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
+        try{
+
+            const res = await fetch("https://atxcyclingstore.onrender.com/bookings/",{
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
                 },
-                body: JSON.stringify(dados)
+
+                body:JSON.stringify(dados)
+
             });
 
-            const result = await res.json();
 
-            if (result.success) {
-                window.location.href = "confirmacao.html";
-            } else {
-                throw new Error("Erro backend");
+            if(!res.ok){
+
+                alert("Erro ao enviar pedido.");
+
+                submitBtn.disabled=false;
+
+                submitBtn.textContent="Enviar Pedido";
+
+                return;
+
             }
 
-        } catch (err) {
 
-            console.error(err);
+            /* limpar apenas dados do form */
+            localStorage.removeItem("nome");
+            localStorage.removeItem("email");
+            localStorage.removeItem("telefone");
+            localStorage.removeItem("mensagem");
+            localStorage.removeItem("data");
+            localStorage.removeItem("modelo_bike");
+            localStorage.removeItem("servico");
 
-            alert("Erro ao enviar");
 
-            // 🔓 voltar ao normal se falhar
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Enviar Pedido";
+            window.location.href="confirmacao.html";
+
+        }
+        catch(err){
+
+            alert("Erro de ligação.");
+
+            submitBtn.disabled=false;
+
+            submitBtn.textContent="Enviar Pedido";
+
         }
 
     });
@@ -293,184 +323,143 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-/* menu hamburguer mobile */
+/* MENU MOBILE */
+document.addEventListener("DOMContentLoaded", function(){
 
-document.addEventListener("DOMContentLoaded", function () {
+    const hamburger=document.getElementById("hamburger");
 
-    const hamburger = document.getElementById("hamburger");
-    const navLinks = document.querySelector(".nav-links");
+    const navLinks=document.querySelector(".nav-links");
 
-    hamburger.addEventListener("click", function () {
+    if(!hamburger) return;
+
+    hamburger.addEventListener("click",function(){
+
         navLinks.classList.toggle("active");
+
     });
 
 });
 
-document.addEventListener("click", function (e) {
 
-    const navLinks = document.querySelector(".nav-links");
-    const hamburger = document.getElementById("hamburger");
+document.addEventListener("click",function(e){
 
-    if (!navLinks.classList.contains("active")) return;
+    const navLinks=document.querySelector(".nav-links");
 
-    const clicouDentroMenu = navLinks.contains(e.target);
-    const clicouHamburger = hamburger.contains(e.target);
+    const hamburger=document.getElementById("hamburger");
 
-    if (!clicouDentroMenu && !clicouHamburger) {
+    if(!navLinks || !hamburger) return;
+
+    if(!navLinks.classList.contains("active")) return;
+
+    const dentro=navLinks.contains(e.target);
+
+    const hamb=hamburger.contains(e.target);
+
+    if(!dentro && !hamb){
+
         navLinks.classList.remove("active");
+
     }
 
 });
 
-/* ================= GALERIA ================= */
 
-const galBikes = document.getElementById("gal-bikes");
-const galXTR = document.getElementById("gal-xtr");
+/* COOKIES */
+document.addEventListener("DOMContentLoaded", function(){
 
-/* só executa se estivermos na página da galeria */
+    const banner=document.getElementById("cookie-banner");
 
-if (galBikes && galXTR) {
+    const submitBtn=document.getElementById("submitBtn");
 
-    /* carregar imagens */
+    const btnAccept=document.getElementById("cookie-accept");
 
-    for (let i = 1; i <= 23; i++) {
+    const btnEssential=document.getElementById("cookie-essential");
 
-        const img = document.createElement("img");
-        img.src = "../images/gal/gal" + i + ".png";
-        img.loading = "lazy";
-        img.classList.add("fade-in");
-
-        galBikes.appendChild(img);
-
-        observer.observe(img); /* usa o observer que já tens */
-
-    }
-
-    for (let i = 1; i <= 13; i++) {
-
-        const img = document.createElement("img");
-        img.src = "../images/xtr/xtr" + i + ".png";
-        img.loading = "lazy";
-        img.classList.add("fade-in");
-
-        galXTR.appendChild(img);
-
-        observer.observe(img);
-
-    }
-
-}
-
-/* ================= LIGHTBOX AVANÇADO ================= */
-
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const closeLightbox = document.getElementById("close-lightbox");
-const prevBtn = document.querySelector(".prev");
-const nextBtn = document.querySelector(".next");
-
-if (lightbox) {
-
-    let images = [];
-    let currentIndex = 0;
-
-    /* atualizar lista de imagens sempre que clicar */
-
-    document.addEventListener("click", function (e) {
-
-        if (e.target.tagName === "IMG" && e.target.closest(".grid-galeria")) {
-
-            images = Array.from(document.querySelectorAll(".grid-galeria img"));
-            currentIndex = images.indexOf(e.target);
-
-            showImage();
-
-            lightbox.style.display = "flex";
-        }
-
-    });
+    const btnReject=document.getElementById("cookie-reject");
 
 
-    function showImage() {
-        lightboxImg.src = images[currentIndex].src;
-    }
+    function atualizarEstado(){
+
+        const consent=localStorage.getItem("cookieConsent");
 
 
-    /* navegar */
+        if(banner){
 
-    function nextImage() {
-        currentIndex = (currentIndex + 1) % images.length;
-        showImage();
-    }
+            if(!consent){
 
-    function prevImage() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        showImage();
-    }
+                banner.style.display="block";
 
-    nextBtn.addEventListener("click", nextImage);
-    prevBtn.addEventListener("click", prevImage);
+            }
+            else{
 
+                banner.style.display="none";
 
-    /* teclado */
-
-    document.addEventListener("keydown", (e) => {
-
-        if (lightbox.style.display === "flex") {
-
-            if (e.key === "ArrowRight") nextImage();
-            if (e.key === "ArrowLeft") prevImage();
-            if (e.key === "Escape") lightbox.style.display = "none";
+            }
 
         }
 
-    });
 
+        if(submitBtn){
 
-    /* fechar */
+            if(consent==="essential" || consent==="all"){
 
-    closeLightbox.addEventListener("click", () => {
-        lightbox.style.display = "none";
-    });
+                submitBtn.disabled=false;
 
-    lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) {
-            lightbox.style.display = "none";
-        }
-    });
+                submitBtn.style.opacity="1";
 
-}
+            }
+            else{
 
-/* ================= NAVBAR SCROLL MOBILE ================= */
+                submitBtn.disabled=true;
 
-const navbar = document.querySelector(".navbar");
+                submitBtn.style.opacity="0.5";
 
-if (navbar) {
+            }
 
-    let lastScroll = 0;
-
-    window.addEventListener("scroll", () => {
-
-        if (window.innerWidth > 768) return;
-
-        const currentScroll = window.scrollY;
-
-        if (currentScroll > lastScroll && currentScroll > 100) {
-            // descer
-            navbar.classList.add("hide");
-        } else {
-            // subir
-            navbar.classList.remove("hide");
         }
 
-        lastScroll = currentScroll;
-
-    });
-
-}
+    }
 
 
+    if(btnAccept){
+
+        btnAccept.onclick=function(){
+
+            localStorage.setItem("cookieConsent","all");
+
+            atualizarEstado();
+
+        };
+
+    }
 
 
+    if(btnEssential){
+
+        btnEssential.onclick=function(){
+
+            localStorage.setItem("cookieConsent","essential");
+
+            atualizarEstado();
+
+        };
+
+    }
 
 
+    if(btnReject){
+
+        btnReject.onclick=function(){
+
+            localStorage.setItem("cookieConsent","rejected");
+
+            atualizarEstado();
+
+        };
+
+    }
+
+
+    atualizarEstado();
+
+});
