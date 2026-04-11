@@ -72,13 +72,15 @@ def create_booking(request):
 
             """
 
-            send_email(
-
-                "adminsiteatx@gmail.com",
-                subject_admin,
-                html_admin
-
-            )
+            # email admin
+            try:
+                send_email(
+                    "adminsiteatx@gmail.com",
+                    subject_admin,
+                    html_admin
+                )
+            except Exception as e:
+                print("Erro email admin:", e)
 
             subject_client = "Confirmação da sua marcação – ATX Cycling Store"
 
@@ -171,13 +173,15 @@ def create_booking(request):
             </div>
             """
 
-            send_email(
-
-                booking.email,
-                subject_client,
-                html_client
-
-            )
+            # email cliente
+            try:
+                send_email(
+                    booking.email,
+                    subject_client,
+                    html_client
+                )
+            except Exception as e:
+                print("Erro email cliente:", e)
 
             return JsonResponse({"success": True})
 

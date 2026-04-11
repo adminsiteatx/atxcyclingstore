@@ -18,7 +18,7 @@ const observer = new IntersectionObserver((entries) => {
 
     });
 
-}, { threshold: 0.01 });
+}, {threshold: 0.01});
 
 fadeElements.forEach(el => observer.observe(el));
 
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
             floatingBtn.classList.add("show");
         }
 
-    }, { threshold: 0.2 });
+    }, {threshold: 0.2});
 
     triggers.forEach(el => observerBtn.observe(el));
 
@@ -128,19 +128,19 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentStep = 0;
 
 
-    function showStep(index){
+    function showStep(index) {
 
         steps.forEach(step => step.classList.remove("active"));
 
         steps[index].classList.add("active");
 
-        indicators.forEach((indicator, i)=>{
+        indicators.forEach((indicator, i) => {
 
-            indicator.classList.remove("active","done");
+            indicator.classList.remove("active", "done");
 
-            if(i === index) indicator.classList.add("active");
+            if (i === index) indicator.classList.add("active");
 
-            if(i < index) indicator.classList.add("done");
+            if (i < index) indicator.classList.add("done");
 
         });
 
@@ -149,9 +149,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     nextBtns.forEach(btn => {
 
-        btn.addEventListener("click", function(){
+        btn.addEventListener("click", function () {
 
-            if(currentStep < steps.length-1){
+            if (currentStep < steps.length - 1) {
 
                 currentStep++;
 
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
 
-            if(currentStep === 2) preencherResumo();
+            if (currentStep === 2) preencherResumo();
 
         });
 
@@ -168,9 +168,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     prevBtns.forEach(btn => {
 
-        btn.addEventListener("click", function(){
+        btn.addEventListener("click", function () {
 
-            if(currentStep > 0){
+            if (currentStep > 0) {
 
                 currentStep--;
 
@@ -183,28 +183,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    function preencherResumo(){
+    function preencherResumo() {
 
         document.getElementById("resumoServico").textContent =
-        document.getElementById("servico").value;
+            document.getElementById("servico").value;
 
         document.getElementById("resumoBike").textContent =
-        document.getElementById("modeloBike").value;
+            document.getElementById("modeloBike").value;
 
         document.getElementById("resumoData").textContent =
-        document.getElementById("data").value;
+            document.getElementById("data").value;
 
         document.getElementById("resumoMensagem").textContent =
-        document.getElementById("mensagem").value;
+            document.getElementById("mensagem").value;
 
         document.getElementById("resumoNome").textContent =
-        document.getElementById("nome").value;
+            document.getElementById("nome").value;
 
         document.getElementById("resumoEmail").textContent =
-        document.getElementById("email").value;
+            document.getElementById("email").value;
 
         document.getElementById("resumoTelefone").textContent =
-        document.getElementById("telefone").value;
+            document.getElementById("telefone").value;
 
     }
 
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* bloquear datas passadas */
     const dataInput = document.getElementById("data");
 
-    if (dataInput){
+    if (dataInput) {
 
         const today = new Date().toISOString().split("T")[0];
 
@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* SUBMIT FINAL */
-    form.addEventListener("submit", async function(e){
+    form.addEventListener("submit", async function (e) {
 
         e.preventDefault();
 
@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* bloqueio final */
-        if(!consent || consent === "rejected"){
+        if (!consent || consent === "rejected") {
 
             alert("Para enviar a marcação tem de aceitar cookies essenciais.");
 
@@ -267,28 +267,27 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
 
-        try{
+        try {
 
             const res = await fetch("https://atxcyclingstore.onrender.com/bookings/",{
+                method: "POST",
 
-                method:"POST",
-
-                headers:{
-                    "Content-Type":"application/json"
+                headers: {
+                    "Content-Type": "application/json"
                 },
 
-                body:JSON.stringify(dados)
+                body: JSON.stringify(dados)
 
             });
 
 
-            if(!res.ok){
+            if (!res.ok) {
 
                 alert("Erro ao enviar pedido.");
 
-                submitBtn.disabled=false;
+                submitBtn.disabled = false;
 
-                submitBtn.textContent="Enviar Pedido";
+                submitBtn.textContent = "Enviar Pedido";
 
                 return;
 
@@ -305,16 +304,15 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.removeItem("servico");
 
 
-            window.location.href="confirmacao.html";
+            window.location.href = "confirmacao.html";
 
-        }
-        catch(err){
+        } catch (err) {
 
             alert("Erro de ligação.");
 
-            submitBtn.disabled=false;
+            submitBtn.disabled = false;
 
-            submitBtn.textContent="Enviar Pedido";
+            submitBtn.textContent = "Enviar Pedido";
 
         }
 
@@ -324,15 +322,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /* MENU MOBILE */
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
 
-    const hamburger=document.getElementById("hamburger");
+    const hamburger = document.getElementById("hamburger");
 
-    const navLinks=document.querySelector(".nav-links");
+    const navLinks = document.querySelector(".nav-links");
 
-    if(!hamburger) return;
+    if (!hamburger) return;
 
-    hamburger.addEventListener("click",function(){
+    hamburger.addEventListener("click", function () {
 
         navLinks.classList.toggle("active");
 
@@ -341,21 +339,21 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 
-document.addEventListener("click",function(e){
+document.addEventListener("click", function (e) {
 
-    const navLinks=document.querySelector(".nav-links");
+    const navLinks = document.querySelector(".nav-links");
 
-    const hamburger=document.getElementById("hamburger");
+    const hamburger = document.getElementById("hamburger");
 
-    if(!navLinks || !hamburger) return;
+    if (!navLinks || !hamburger) return;
 
-    if(!navLinks.classList.contains("active")) return;
+    if (!navLinks.classList.contains("active")) return;
 
-    const dentro=navLinks.contains(e.target);
+    const dentro = navLinks.contains(e.target);
 
-    const hamb=hamburger.contains(e.target);
+    const hamb = hamburger.contains(e.target);
 
-    if(!dentro && !hamb){
+    if (!dentro && !hamb) {
 
         navLinks.classList.remove("active");
 
@@ -365,54 +363,52 @@ document.addEventListener("click",function(e){
 
 
 /* COOKIES */
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
 
-    const banner=document.getElementById("cookie-banner");
+    const banner = document.getElementById("cookie-banner");
 
-    const submitBtn=document.getElementById("submitBtn");
+    const submitBtn = document.getElementById("submitBtn");
 
-    const btnAccept=document.getElementById("cookie-accept");
+    const btnAccept = document.getElementById("cookie-accept");
 
-    const btnEssential=document.getElementById("cookie-essential");
+    const btnEssential = document.getElementById("cookie-essential");
 
-    const btnReject=document.getElementById("cookie-reject");
-
-
-    function atualizarEstado(){
-
-        const consent=localStorage.getItem("cookieConsent");
+    const btnReject = document.getElementById("cookie-reject");
 
 
-        if(banner){
+    function atualizarEstado() {
 
-            if(!consent){
+        const consent = localStorage.getItem("cookieConsent");
 
-                banner.style.display="block";
 
-            }
-            else{
+        if (banner) {
 
-                banner.style.display="none";
+            if (!consent) {
+
+                banner.style.display = "block";
+
+            } else {
+
+                banner.style.display = "none";
 
             }
 
         }
 
 
-        if(submitBtn){
+        if (submitBtn) {
 
-            if(consent==="essential" || consent==="all"){
+            if (consent === "essential" || consent === "all") {
 
-                submitBtn.disabled=false;
+                submitBtn.disabled = false;
 
-                submitBtn.style.opacity="1";
+                submitBtn.style.opacity = "1";
 
-            }
-            else{
+            } else {
 
-                submitBtn.disabled=true;
+                submitBtn.disabled = true;
 
-                submitBtn.style.opacity="0.5";
+                submitBtn.style.opacity = "0.5";
 
             }
 
@@ -421,11 +417,11 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 
-    if(btnAccept){
+    if (btnAccept) {
 
-        btnAccept.onclick=function(){
+        btnAccept.onclick = function () {
 
-            localStorage.setItem("cookieConsent","all");
+            localStorage.setItem("cookieConsent", "all");
 
             atualizarEstado();
 
@@ -434,11 +430,11 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 
-    if(btnEssential){
+    if (btnEssential) {
 
-        btnEssential.onclick=function(){
+        btnEssential.onclick = function () {
 
-            localStorage.setItem("cookieConsent","essential");
+            localStorage.setItem("cookieConsent", "essential");
 
             atualizarEstado();
 
@@ -447,11 +443,11 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 
-    if(btnReject){
+    if (btnReject) {
 
-        btnReject.onclick=function(){
+        btnReject.onclick = function () {
 
-            localStorage.setItem("cookieConsent","rejected");
+            localStorage.setItem("cookieConsent", "rejected");
 
             atualizarEstado();
 
