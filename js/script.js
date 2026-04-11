@@ -69,25 +69,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* AUTOSAVE FORM */
-const formAutoSave = document.querySelector(".reserva-form");
+Object.keys(localStorage).forEach(key => {
 
-if (formAutoSave) {
+    if([
+        "nome",
+        "email",
+        "telefone",
+        "mensagem",
+        "data",
+        "modelo_bike",
+        "servico"
+    ].includes(key)){
 
-    const inputs = formAutoSave.querySelectorAll("input, textarea, select");
+        localStorage.removeItem(key);
 
-    inputs.forEach(input => {
+    }
 
-        const savedValue = localStorage.getItem(input.name);
-
-        if (savedValue) input.value = savedValue;
-
-        input.addEventListener("input", () => {
-            localStorage.setItem(input.name, input.value);
-        });
-
-    });
-
-}
+});
 
 
 /* cancelar reserva limpa apenas dados */
