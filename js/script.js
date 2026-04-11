@@ -68,22 +68,43 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
 /* AUTOSAVE FORM */
-Object.keys(localStorage).forEach(key => {
+const formAutoSave = document.querySelector(".reserva-form");
 
-    if([
-        "nome",
-        "email",
-        "telefone",
-        "mensagem",
-        "data",
-        "modelo_bike",
-        "servico"
-    ].includes(key)){
+if (formAutoSave) {
 
-        localStorage.removeItem(key);
+    const inputs = formAutoSave.querySelectorAll("input, textarea, select");
 
-    }
+    inputs.forEach(input => {
+
+        const savedValue = localStorage.getItem(input.name);
+
+        if (savedValue) input.value = savedValue;
+
+        input.addEventListener("input", () => {
+
+            localStorage.setItem(input.name, input.value);
+
+        });
+
+    });
+
+}
+
+
+/* garantir que guarda mesmo ao sair da página */
+window.addEventListener("beforeunload", () => {
+
+    if (!formAutoSave) return;
+
+    const inputs = formAutoSave.querySelectorAll("input, textarea, select");
+
+    inputs.forEach(input => {
+
+        localStorage.setItem(input.name, input.value);
+
+    });
 
 });
 
